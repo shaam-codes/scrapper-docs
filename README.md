@@ -49,7 +49,9 @@ As usual all logs, errors and also system or infrastructure stats monitor here. 
 
 PostgreSQL uses as the relational database for the system and its primary data storage. we may some other databases such elastic search or some more caches for query improvements or any other performance improvements later
 
-here is database ERD![ERD for the database](.//diagrams/schema.png "ERD for the database")
+here is database ERD
+
+![ERD for the database](.//diagrams/schema.png "ERD for the database")
 
 
 [draw.io](https://app.diagrams.net/#Hshaam-codes%2Fscrapper-docs%2Fmain%2Fscrapper.drawio)
