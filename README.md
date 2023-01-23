@@ -23,6 +23,8 @@ These servers should scale out and be based on the network traffic. Since these 
 
 Application build using [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) to isolate business logic from the framework or any other dependencies such database or message brokers, etc. Also helps to execute tests in it without real dependencies.
 
+![Hexagonal Architecture](.//diagrams/hexagonal.drawio.png "Hexagonal Architecture")
+
 ## scheduler worker
 
 This works in a interval to fetch active sensor chambers and push to the message queue if they're ready to collect the data (collection intervals can be defined by user per chamber). For the time being only one instance is enough for the requirements, will decide later if needed further, if so we may consider the duplication of messages.
