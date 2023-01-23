@@ -7,13 +7,13 @@ A high level diagram of services as below
 
 ![high level diagram of services](.//diagrams/arhitecture.png "high level diagram of services")
 
-## API Gateway
+## [API Gateway](https://github.com/shaam-codes/scrapper-proxy)
 We use Envoy proxy as the proxy as the gateway. This manages the authentication and manages ngress for the web servers. 
 
-## Authentication
+## [Authentication](https://github.com/shaam-codes/scrapper-ext-auth)
 
 As name refers, this manages the authentication process and updates the header with necessary details.
-## Core Application
+## [Core Application](https://github.com/shaam-codes/scrapper-app)
 
 This runs on web servers. Each server has their own web servers to communicate with Envoy proxy. [Nginx Unit](https://unit.nginx.org/) used as the web server, it runs as the application server and web server.
 
@@ -23,13 +23,13 @@ These servers should scale out and be based on the network traffic. Since these 
 
 Application build using [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) to isolate business logic from the framework or any other dependencies such database or message brokers, etc. Also helps to execute tests in it without real dependencies.
 
-![Hexagonal Architecture](.//diagrams/hexagonal.drawio.png "Hexagonal Architecture")
+![Hexagonal Architecture](.//diagrams/hexagonal.png "Hexagonal Architecture")
 
-## scheduler worker
+## [scheduler worker](https://github.com/shaam-codes/scrapper-schedular)
 
 This works in a interval to fetch active sensor chambers and push to the message queue if they're ready to collect the data (collection intervals can be defined by user per chamber). For the time being only one instance is enough for the requirements, will decide later if needed further, if so we may consider the duplication of messages.
 
-## worker
+## [worker](https://github.com/shaam-codes/scrapper-worker)
 
 These are listeners or subscribers of the message queue, if any new message available in the queue mark as acknowledged and process it. Basically this will send the request to the chamber and store the response in the main storage. we may need to use any other data storage as an intermediate data storage (stream/cache) and need to define another worker to persistent data into postgres
 For requesting sensor chambers uses envoy egress (TBD)
@@ -42,10 +42,10 @@ This uses [BullMQ](https://docs.bullmq.io/) to store each event, ideally all the
 As usual this is used for reducing requests to persistent data storage and performance. Store some most frequent details such as active chambers, etc.
 Also this use by some functions by API Gateway such as rate limiter and authentication
 
-## Monitoring
+## [Monitoring](https://github.com/shaam-codes/scrapper-manager)
 
 As usual all logs, errors and also system or infrastructure stats monitor here. Service uses [OpenTelemetry](https://opentelemetry.io/).
-## Database
+## [Database](https://github.com/shaam-codes/scrapper-schema)
 
 PostgreSQL uses as the relational database for the system and its primary data storage. we may some other databases such elastic search or some more caches for query improvements or any other performance improvements later
 
